@@ -56,14 +56,17 @@ export class UserListComponent implements OnInit {
 
   delete(id) {
 
-    // for (let i = 0; i < this.userFilter.length; i++) {
+    // for (let i = 0; i < this.userFilter.length; i++) {       đây là cách 1 để xóa user
     //   if (id == this.userFilter[i].id) {
     //     this.userFilter.splice(i, 1);
     //     // console.log(this.users[i].name +" deleted")
     //     console.log(this.userFilter.length);
     //   }
     // }
-    let userDeleted = [];
+
+
+
+    let userDeleted = [];                             //đây là cách 2 để xóa user
     this.users.map(user => {      //dùng map để duyệt mảng
       if(user.id != id){
         userDeleted.push(user);
