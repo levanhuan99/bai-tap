@@ -67,7 +67,8 @@ export class UserListComponent implements OnInit {
 
 
     let userDeleted = [];                             //đây là cách 2 để xóa user
-    this.users.map(user => {      //dùng map để duyệt mảng
+    this.users.map(user => {      //dùng map để duyệt mảng  context1: string='';
+
       if(user.id != id){
         userDeleted.push(user);
       }
