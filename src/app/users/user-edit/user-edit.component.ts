@@ -18,20 +18,20 @@ export class UserEditComponent implements OnInit {
 
   users:IUser[]=[];
 
-
+  userEdit:IUser;
   constructor(private activatedRoute: ActivatedRoute, private groupService: GroupService, private formBuilder: FormBuilder, private userService: UserService,private router:Router) {
     this.idFromUrl = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
     this.users=this.getAllUser();
-    console.log(this.getUserById());
+    this.userEdit=this.getUserById();
 
     this.newUSer = this.formBuilder.group({
-      id: [this.getUserById().id],
-      name: [this.getUserById().name],
-      email: [this.getUserById().email],
-      group_id:[this.getUserById().group_id]
+      id: [this.userEdit.id],
+      name: [this.userEdit.name],
+      email: [this.userEdit.email],
+      group_id:[this.userEdit.group_id]
     })
 
 
@@ -41,8 +41,16 @@ export class UserEditComponent implements OnInit {
   save() {
     let data=this.newUSer.value;
     data.group_id= +data.group_id;
-    // this.userService.add(data);
-    this.getUserById()
+    for (let i=0;i<this.users.length;i++){
+      if (this.users[i].id==this.idFromUrl){
+        this.users[i]=data;
+        console.log(data);
+      }
+    }
+    // this.getUserById().id=data.id;
+    // this.getUserById().name=data.name;
+    // this.getUserById().email=data.email;
+    // this.getUserById().group_id=data.group_id;
     this.router.navigate(['users']);
     console.log(this.userService.getAll());
 
@@ -53,7 +61,6 @@ export class UserEditComponent implements OnInit {
   }
 
   getUserById(): IUser {
-     console.log( this.userService.findUserById(this.idFromUrl)) ;
     return this.userService.findUserById(this.idFromUrl);
 
   }

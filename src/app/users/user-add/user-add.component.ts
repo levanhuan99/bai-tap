@@ -14,7 +14,6 @@ export class UserAddComponent implements OnInit {
   newUSer: FormGroup;
   groups: IGroup[] = [];
 
-
   constructor(private formBuilder: FormBuilder, private userService: UserService, private groupService: GroupService,private router:Router) {
   }
 
