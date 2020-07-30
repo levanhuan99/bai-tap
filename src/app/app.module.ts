@@ -7,6 +7,9 @@ import { MenuComponent } from './core/menu/menu.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { SearchInputComponent } from './core/search-input/search-input.component';
 import { GroupListComponent } from './groups/group-list/group-list.component';
+import { UserAddComponent } from './users/user-add/user-add.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -14,12 +17,15 @@ import { GroupListComponent } from './groups/group-list/group-list.component';
     MenuComponent,
     UserListComponent,
     SearchInputComponent,
-    GroupListComponent
+    GroupListComponent,
+    UserAddComponent,
+    UserEditComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

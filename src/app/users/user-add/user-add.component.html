@@ -1,0 +1,25 @@
+<form [formGroup]="newUSer" (ngSubmit)="create()">
+  <div class="form-group">
+    <label>Id</label>
+    <input type="number" class="form-control" formControlName="id" aria-describedby="emailHelp">
+  </div>
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" formControlName="name" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" class="form-control" formControlName="email" id="exampleInputPassword1">
+  </div>
+
+  <div class="form-group">
+    <label>Group</label>
+    <select class="form-control" id="exampleFormControlSelect1" formControlName="group_id">
+      <ng-container *ngFor="let group of groups">
+        <option value="{{group.id}}">{{group.name}}</option>
+      </ng-container>
+    </select>
+
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

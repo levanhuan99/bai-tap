@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {IUser} from "../iuser";
+import {UserService} from "../user.service";
+import {IGroup} from "../../groups/igroup";
+import {GroupService} from "../../groups/group.service";
 
 @Component({
   selector: 'app-user-list',
@@ -8,38 +11,24 @@ import {IUser} from "../iuser";
 })
 export class UserListComponent implements OnInit {
 
+  // userService:UserService;
   title_page = 'Users'
-  users: IUser[] = []
+  users: IUser[] = [];
+  groups:IGroup[]=[];
 
   // userFilter = [];
 
-  constructor() {
+  constructor(private userService:UserService,private  groupService:GroupService) {
   }
 
   ngOnInit(): void {
     this.users = this.getUserList();
-    // this.userFilter = this.users;
+    this.groups=this.getGroups();
   }
 
   getUserList(): IUser[] {
-    let users = [
-      {
-        id: 1,
-        name: 'nam',
-        email: 'nam@gamil.com'
-      },
-      {
-        id: 2,
-        name: 'vinh',
-        email: 'vinh@gamil.com'
-      },
-      {
-        id: 3,
-        name: 'duc',
-        email: 'duc@gamil.com'
-      }
-    ]
-    return users;
+    let users1 =this.userService.getAll();
+    return users1;
   }
 
   search(event) {
@@ -76,5 +65,9 @@ export class UserListComponent implements OnInit {
     this.users = userDeleted;   //cuối cùng thì sẽ có 1 mảng user trừ user có id khi delete.
   }
 
+
+  getGroups():IGroup[]{
+    return this.groupService.getAll();
+  }
 
 }

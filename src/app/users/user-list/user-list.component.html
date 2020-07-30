@@ -5,12 +5,13 @@
         {{ title_page }}
       </div>
       <div class="col-md-8">
-        <app-search-input (searchValue)="search($event)" ></app-search-input>
+        <app-search-input (searchValue)="search($event)"></app-search-input>
       </div>
     </div>
 
-
+    <button class="btn btn-danger" [routerLink]="['add']">Create</button>
   </div>
+
   <div class="card-body">
     <table class="table">
       <thead class="thead-light">
@@ -18,7 +19,8 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Group</th>
+        <th scope="col" colspan="2">Handle</th>
       </tr>
       </thead>
       <tbody>
@@ -26,11 +28,14 @@
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ user.name }}</td>
         <td>{{ user.email}}</td>
+        <ng-container *ngFor="let group of groups">
+          <td *ngIf="group.id==user.group_id">{{group.name}}</td>
+        </ng-container>
         <td>
           <button class="btn btn-danger" (click)="delete(user.id)">Delete</button>
+          <button class="btn btn-danger" [routerLink]="['edit/'+user.id]">Edit</button>
         </td>
       </tr>
-
       </tbody>
     </table>
   </div>
