@@ -15,7 +15,7 @@
   <div class="form-group">
     <label>Group</label>
     <select class="form-control" id="exampleFormControlSelect1" formControlName="group_id">
-      <ng-container *ngFor="let group of groups">
+      <ng-container *ngFor="let group of groups ">
         <option value="{{group.id}}">{{group.name}}</option>
       </ng-container>
     </select>

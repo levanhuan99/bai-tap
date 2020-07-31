@@ -15,6 +15,8 @@ export class UserListComponent implements OnInit {
   title_page = 'Users'
   users: IUser[] = [];
   groups:IGroup[]=[];
+  totalRec : number;
+  page: number = 1;
 
   // userFilter = [];
 
@@ -34,7 +36,10 @@ export class UserListComponent implements OnInit {
   search(event) {
     let keyword = event.target.value;
     this.users = (keyword) ? this.filerByKeyword(keyword) : this.getUserList();
+
+    this.totalRec = this.users.length;
   }
+
 
   filerByKeyword(keyword) {
     return this.users.filter(user => {

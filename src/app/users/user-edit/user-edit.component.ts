@@ -16,44 +16,41 @@ export class UserEditComponent implements OnInit {
   groups: IGroup[] = [];
   idFromUrl: number;
 
-  users:IUser[]=[];
+  users: IUser[] = [];
 
-  userEdit:IUser;
-  constructor(private activatedRoute: ActivatedRoute, private groupService: GroupService, private formBuilder: FormBuilder, private userService: UserService,private router:Router) {
+  userEdit: IUser;
+
+  constructor(private activatedRoute: ActivatedRoute, private groupService: GroupService, private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
     this.idFromUrl = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
-    this.users=this.getAllUser();
-    this.userEdit=this.getUserById();
+    this.users = this.getAllUser();
+    this.userEdit = this.getUserById();
 
     this.newUSer = this.formBuilder.group({
       id: [this.userEdit.id],
       name: [this.userEdit.name],
       email: [this.userEdit.email],
-      group_id:[this.userEdit.group_id]
+      group_id: [this.userEdit.group_id]
     })
 
 
     this.groups = this.getGroups();
 
   }
+
   save() {
-    let data=this.newUSer.value;
-    data.group_id= +data.group_id;
-    for (let i=0;i<this.users.length;i++){
-      if (this.users[i].id==this.idFromUrl){
-        this.users[i]=data;
+    let data = this.newUSer.value;
+    data.group_id = +data.group_id;
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].id == this.idFromUrl) {
+        this.users[i] = data;
         console.log(data);
       }
     }
-    // this.getUserById().id=data.id;
-    // this.getUserById().name=data.name;
-    // this.getUserById().email=data.email;
-    // this.getUserById().group_id=data.group_id;
     this.router.navigate(['users']);
     console.log(this.userService.getAll());
-
   }
 
   getGroups(): IGroup[] {
@@ -62,9 +59,9 @@ export class UserEditComponent implements OnInit {
 
   getUserById(): IUser {
     return this.userService.findUserById(this.idFromUrl);
-
   }
-  getAllUser():IUser[]{
+
+  getAllUser(): IUser[] {
     return this.userService.getAll();
   }
 }
